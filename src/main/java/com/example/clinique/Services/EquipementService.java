@@ -5,11 +5,9 @@ import com.example.clinique.DTO.FournisseurDTO;
 import com.example.clinique.Entity.Equipement.Article;
 import com.example.clinique.Entity.Equipement.Categorie;
 import com.example.clinique.Entity.Equipement.Fournisseur;
-import com.example.clinique.Entity.Equipement.Stock;
 import com.example.clinique.Repositories.ArticleRepository;
 import com.example.clinique.Repositories.CategorieRepository;
 import com.example.clinique.Repositories.FournisseurRepository;
-import com.example.clinique.Repositories.StockRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +18,7 @@ import java.util.List;
 @Service
 public class EquipementService {
 
-    @Autowired
-    private StockRepository stockRepository;
+
 
     @Autowired
     private ArticleRepository articleRepository;
@@ -43,12 +40,22 @@ public class EquipementService {
         // Récupérer le fournisseur à partir de l'identifiant
         Fournisseur fournisseur = fournisseurRepository.findById(equipementDTO.getFournisseurId())
                 .orElseThrow(() -> new EntityNotFoundException("Fournisseur not found with id: " + equipementDTO.getFournisseurId()));
+
         // Récupérer la catégorie à partir de l'identifiant
         Categorie categorie = categorieRepository.findById(equipementDTO.getCategorieId())
                 .orElseThrow(() -> new EntityNotFoundException("Categorie not found with id: " + equipementDTO.getCategorieId()));
 
         // Créer l'objet Article à partir de l'ArticleDTO et des entités récupérées
-        Article equipement = new Article(equipementDTO.getNom(), equipementDTO.getDescription(), fournisseur, categorie);
+        Article equipement = new Article();
+        equipement.setNom(equipementDTO.getNom());
+        equipement.setPhoto(equipementDTO.getPhoto());
+        equipement.setDescription(equipementDTO.getDescription());
+        equipement.setFournisseur(fournisseur);
+        equipement.setCategorie(categorie);
+        equipement.setQuantite(equipementDTO.getQuantite());
+        equipement.setSeuilMin(equipementDTO.getSeuilMin());
+        equipement.setSeuilMax(equipementDTO.getSeuilMax());
+        equipement.setEmplacement(equipementDTO.getEmplacement());
 
         // Enregistrer l'article dans le repository
         return articleRepository.save(equipement);
@@ -58,22 +65,8 @@ public class EquipementService {
         articleRepository.deleteById(id);
     }
 
-    public List<Stock> getAllStocks() {
-        return stockRepository.findAll();
-    }
 
-    public Stock getStockById(Long id) {
-        return stockRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Stock not found with id: " + id));
-    }
 
-    public Stock saveStock(Stock stock) {
-        return stockRepository.save(stock);
-    }
-
-    public void deleteStock(Long id) {
-        stockRepository.deleteById(id);
-    }
 
     public List<Fournisseur> getAllFournisseurs() {
         return fournisseurRepository.findAll();

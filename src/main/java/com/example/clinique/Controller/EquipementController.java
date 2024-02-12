@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/equipements")
 public class EquipementController {
@@ -26,7 +26,7 @@ public class EquipementController {
 
     // Méthodes pour la gestion des équipements
 
-    @GetMapping
+    @GetMapping("/equipements")
     public List<Article> getAllEquipements() {
         return equipementService.getAllEquipements();
     }
@@ -36,7 +36,7 @@ public class EquipementController {
         return equipementService.getEquipementById(id);
     }
 
-    @PostMapping
+    @PostMapping("/equipements")
     public Article createEquipement(@RequestBody ArticleDTO equipementDTO) {
         return equipementService.saveEquipement(equipementDTO);
     }
