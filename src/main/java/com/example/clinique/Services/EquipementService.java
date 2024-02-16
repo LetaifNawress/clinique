@@ -81,7 +81,7 @@ public class EquipementService {
 
     public Fournisseur saveFournisseur(FournisseurDTO fournisseurDTO) {
         // Créer une instance de Fournisseur à partir de FournisseurDTO
-        Fournisseur fournisseur = new Fournisseur(fournisseurDTO.getNom(), fournisseurDTO.getAdresse(), fournisseurDTO.getEmail());
+        Fournisseur fournisseur = new Fournisseur(fournisseurDTO.getNom(), fournisseurDTO.getAdresse(), fournisseurDTO.getEmail(), fournisseurDTO.getTel(), fournisseurDTO.getPhoto());
 
         // Enregistrer le fournisseur dans le repository
         return fournisseurRepository.save(fournisseur);
@@ -98,7 +98,8 @@ public class EquipementService {
         fournisseur.setNom(fournisseurDTO.getNom());
         fournisseur.setAdresse(fournisseurDTO.getAdresse());
         fournisseur.setEmail(fournisseurDTO.getEmail());
-
+        fournisseur.setTel(fournisseurDTO.getTel());
+        fournisseur.setPhoto(fournisseurDTO.getPhoto());
         // Enregistre les modifications dans la base de données et retourne le fournisseur mis à jour
         return fournisseurRepository.save(fournisseur);
     }}

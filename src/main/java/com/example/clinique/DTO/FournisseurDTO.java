@@ -8,4 +8,6 @@ public class FournisseurDTO {
     private String nom;
     private String adresse;
     private String email;
+    private Long tel;
+    private String photo;
 }

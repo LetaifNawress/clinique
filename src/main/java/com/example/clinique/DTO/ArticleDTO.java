@@ -14,7 +14,7 @@ public class ArticleDTO {
         private Integer seuilMax;
         private String emplacement;
         private String photo;
-    }
+
 
 
 }
