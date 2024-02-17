@@ -80,12 +80,21 @@ public class EquipementService {
 
 
     public Fournisseur saveFournisseur(FournisseurDTO fournisseurDTO) {
+        // Vérifier si les informations fournies sont complètes
+        if (fournisseurDTO.getNom() == null || fournisseurDTO.getNom().isEmpty() ||
+                fournisseurDTO.getAdresse() == null || fournisseurDTO.getAdresse().isEmpty() ||
+                fournisseurDTO.getEmail() == null || fournisseurDTO.getEmail().isEmpty() ||
+                fournisseurDTO.getTel() == null || fournisseurDTO.getPhoto() == null || fournisseurDTO.getPhoto().isEmpty()) {
+            throw new IllegalArgumentException("Les informations fournies sont incomplètes");
+        }
+
         // Créer une instance de Fournisseur à partir de FournisseurDTO
         Fournisseur fournisseur = new Fournisseur(fournisseurDTO.getNom(), fournisseurDTO.getAdresse(), fournisseurDTO.getEmail(), fournisseurDTO.getTel(), fournisseurDTO.getPhoto());
 
         // Enregistrer le fournisseur dans le repository
         return fournisseurRepository.save(fournisseur);
     }
+
     public void deleteFournisseur(Long id) {
         fournisseurRepository.deleteById(id);
     }

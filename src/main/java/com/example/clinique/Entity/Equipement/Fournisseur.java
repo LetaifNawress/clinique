@@ -22,9 +22,9 @@ public class Fournisseur {
     private String nom;
     private String adresse;
     private String email;
-    private long tel;
+    private String tel;
     private String photo;
-    public Fournisseur(String nom, String adresse, String email , long tel,String photo) {
+    public Fournisseur(String nom, String adresse, String email , String tel,String photo) {
         this.nom = nom;
         this.adresse = adresse;
         this.email = email;
