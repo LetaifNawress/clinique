@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EquipementService {
@@ -48,7 +49,7 @@ public class EquipementService {
         // Créer l'objet Article à partir de l'ArticleDTO et des entités récupérées
         Article equipement = new Article();
         equipement.setNom(equipementDTO.getNom());
-        equipement.setPhoto(equipementDTO.getPhoto());
+
         equipement.setDescription(equipementDTO.getDescription());
         equipement.setFournisseur(fournisseur);
         equipement.setCategorie(categorie);
@@ -84,15 +85,43 @@ public class EquipementService {
         if (fournisseurDTO.getNom() == null || fournisseurDTO.getNom().isEmpty() ||
                 fournisseurDTO.getAdresse() == null || fournisseurDTO.getAdresse().isEmpty() ||
                 fournisseurDTO.getEmail() == null || fournisseurDTO.getEmail().isEmpty() ||
-                fournisseurDTO.getTel() == null || fournisseurDTO.getPhoto() == null || fournisseurDTO.getPhoto().isEmpty()) {
+                fournisseurDTO.getTel() == null ) {
             throw new IllegalArgumentException("Les informations fournies sont incomplètes");
         }
 
         // Créer une instance de Fournisseur à partir de FournisseurDTO
-        Fournisseur fournisseur = new Fournisseur(fournisseurDTO.getNom(), fournisseurDTO.getAdresse(), fournisseurDTO.getEmail(), fournisseurDTO.getTel(), fournisseurDTO.getPhoto());
+        Fournisseur fournisseur = new Fournisseur(fournisseurDTO.getNom(), fournisseurDTO.getAdresse(), fournisseurDTO.getEmail(), fournisseurDTO.getTel());
 
         // Enregistrer le fournisseur dans le repository
         return fournisseurRepository.save(fournisseur);
+    }
+    public Article updateArticle(Long id, ArticleDTO articleDTO) {
+        Optional<Article> optionalArticle = articleRepository.findById(id);
+        // Récupérer la catégorie à partir de l'identifiant
+        Categorie categorie = categorieRepository.findById(articleDTO.getCategorieId())
+                .orElseThrow(() -> new EntityNotFoundException("Categorie not found with id: " + articleDTO.getCategorieId()));
+        Fournisseur fournisseur = fournisseurRepository.findById(articleDTO.getFournisseurId())
+                .orElseThrow(() -> new EntityNotFoundException("Fournisseur not found with id: " + articleDTO.getFournisseurId()));
+
+
+
+        if (optionalArticle.isPresent()) {
+            Article article = optionalArticle.get();
+            // Mettre à jour les champs de l'équipement avec les nouvelles données
+            article.setNom(articleDTO.getNom());
+            article.setDescription(articleDTO.getDescription());
+            article.setFournisseur(fournisseur);
+            article.setCategorie(categorie);
+            article.setQuantite(articleDTO.getQuantite());
+            article.setSeuilMin(articleDTO.getSeuilMin());
+            article.setSeuilMax(articleDTO.getSeuilMax());
+            article.setEmplacement(articleDTO.getEmplacement());
+            // Enregistrer et retourner l'équipement mis à jour
+            return articleRepository.save(article);
+        } else {
+            // Gérer le cas où l'équipement n'est pas trouvé
+            throw new RuntimeException("Équipement non trouvé avec l'identifiant : " + id);
+        }
     }
 
     public void deleteFournisseur(Long id) {
@@ -108,7 +137,7 @@ public class EquipementService {
         fournisseur.setAdresse(fournisseurDTO.getAdresse());
         fournisseur.setEmail(fournisseurDTO.getEmail());
         fournisseur.setTel(fournisseurDTO.getTel());
-        fournisseur.setPhoto(fournisseurDTO.getPhoto());
+
         // Enregistre les modifications dans la base de données et retourne le fournisseur mis à jour
         return fournisseurRepository.save(fournisseur);
     }}

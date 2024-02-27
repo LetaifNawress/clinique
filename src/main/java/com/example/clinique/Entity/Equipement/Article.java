@@ -23,7 +23,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
-    private String photo;
+
     private String description;
     @ManyToOne
     @JoinColumn(name = "fournisseur_id")
@@ -36,7 +36,7 @@ public class Article {
     private Integer seuilMax;
     private String emplacement;
 
-    public Article(String nom, String description, Fournisseur fournisseur, Categorie categorie, Integer quantite, Integer seuilMin, Integer seuilMax, String emplacement, String photo) {
+    public Article(String nom, String description, Fournisseur fournisseur, Categorie categorie, Integer quantite, Integer seuilMin, Integer seuilMax, String emplacement) {
         this.nom = nom;
         this.description = description;
         this.fournisseur = fournisseur;
@@ -45,6 +45,6 @@ public class Article {
         this.seuilMin = seuilMin;
         this.seuilMax = seuilMax;
         this.emplacement = emplacement;
-        this.photo = photo;
+
     }
 }

@@ -35,6 +35,10 @@ public class EquipementController {
     public Article getEquipementById(@PathVariable Long id) {
         return equipementService.getEquipementById(id);
     }
+    @PutMapping("/{id}")
+    public Article updateArticle(@PathVariable Long id, @RequestBody ArticleDTO articleDTO) {
+        return equipementService.updateArticle(id, articleDTO);
+    }
 
     @PostMapping("/equipements")
     public Article createEquipement(@RequestBody ArticleDTO equipementDTO) {
