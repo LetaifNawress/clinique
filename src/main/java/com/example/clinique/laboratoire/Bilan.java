@@ -20,7 +20,7 @@ import java.util.List;
 public class Bilan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idB;
 
     // Autres attributs du bilan
 
@@ -30,8 +30,8 @@ public class Bilan {
     @OneToMany(mappedBy = "bilan", cascade = CascadeType.ALL)
     private List<Hemoglobine> hemoglobines;
 
-    @OneToMany(mappedBy = "bilan", cascade = CascadeType.ALL)
-    private List<Lipidique> lipidiques;
+    //@OneToMany(mappedBy = "bilan", cascade = CascadeType.ALL)
+    //private List<Lipidique> lipidiques;
 
     @OneToMany(mappedBy = "bilan", cascade = CascadeType.ALL)
     private List<Transaminases> transaminases;
@@ -44,10 +44,10 @@ public class Bilan {
     // Getters et Setters
 
     //contructeur
-    public Bilan(List<Glycemie> glycemies, List<Hemoglobine> hemoglobines, List<Lipidique> lipidiques, List<Transaminases> transaminases, List<IonogrammeSanguin> ionogrammeSanguin) {
+    public Bilan(List<Glycemie> glycemies, List<Hemoglobine> hemoglobines,/* List<Lipidique> lipidiques,*/ List<Transaminases> transaminases, List<IonogrammeSanguin> ionogrammeSanguin) {
         this.glycemies = glycemies;
         this.hemoglobines = hemoglobines;
-        this.lipidiques = lipidiques;
+        //this.lipidiques = lipidiques;
         this.transaminases = transaminases;
         this.ionogrammeSanguin = ionogrammeSanguin;
     }

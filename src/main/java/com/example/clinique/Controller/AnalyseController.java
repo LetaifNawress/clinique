@@ -14,14 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/analyses")
+@RequestMapping("/bi")
 
 public class AnalyseController {
 
-    @Autowired
+   @Autowired
     private LaboratoireService laboratoireService;
 
-    @PostMapping("/bilan/{bilanId}/glycemie")
+   /* @PostMapping("{bilanId}/glycemie")
     public ResponseEntity<Bilan> addGlycemieToBilan(@PathVariable Long bilanId, @RequestBody Glycemie glycemie) {
         Bilan bilan = laboratoireService.getBilanById(bilanId);
         if (bilan != null) {
@@ -37,7 +37,7 @@ public class AnalyseController {
         }
     }
 
-    @PostMapping("/bilan/{bilanId}/hemoglobine")
+    @PostMapping("{bilanId}/hemoglobine")
     public ResponseEntity<Bilan> addHemoglobineToBilan(@PathVariable Long bilanId, @RequestBody Hemoglobine hemoglobine) {
         Bilan bilan = laboratoireService.getBilanById(bilanId);
         if (bilan != null) {
@@ -51,7 +51,7 @@ public class AnalyseController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
+    }*/
 
     @Autowired
     private GlycemieRepository glycemieRepository;
@@ -83,7 +83,7 @@ public class AnalyseController {
         return glycemieRepository.save(glycemie);
     }
 
-    @DeleteMapping("/glycemie/{id}")
+    @DeleteMapping("/glycemi/{id}")
     public void deleteGlycemie(@PathVariable Long id) {
         Glycemie glycemie = glycemieRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Glycemie not found with id: " + id));

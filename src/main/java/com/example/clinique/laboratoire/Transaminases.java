@@ -1,9 +1,13 @@
 package com.example.clinique.laboratoire;
+
+
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 
 @Entity
@@ -12,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonSerialize
-public class Transaminases extends Analyse {
+public class Transaminases {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +24,7 @@ public class Transaminases extends Analyse {
     private double sgot;
 
     @ManyToOne
-    @JoinColumn(name = "bilan_id", nullable = false)
+    @JoinColumn(name = "idB", nullable = false)
     private Bilan bilan;
 
     public Transaminases(double sgpt, double sgot, Bilan bilan) {

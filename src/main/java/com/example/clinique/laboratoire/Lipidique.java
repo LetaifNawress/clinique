@@ -27,7 +27,7 @@ public class Lipidique {
     private double vldl;
 
     @ManyToOne
-    @JoinColumn(name = "bilan_id", nullable = false)
+    @JoinColumn(name = "idB", nullable = false)
     private Bilan bilan;
 
     public Lipidique(double cholesterol, double triglycerides, double hdl, double ldl, double vldl, Bilan bilan) {

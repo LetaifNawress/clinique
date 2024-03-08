@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+
 
 @Entity
 @Table(name = "hemoglobine")
@@ -16,8 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonSerialize
-public class Hemoglobine extends Analyse{
-@Id
+public class Hemoglobine {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double hemoglobine_glycosée;
@@ -25,7 +25,7 @@ public class Hemoglobine extends Analyse{
     private double acide_urique;
 
     @ManyToOne
-    @JoinColumn(name = "bilan_id", nullable = false)
+    @JoinColumn(name = "idB", nullable = false)
     private Bilan bilan;
 
     public Hemoglobine(double hemoglobine_glycosée, double creatinine, double acide_urique, Bilan bilan) {
@@ -34,6 +34,4 @@ public class Hemoglobine extends Analyse{
         this.acide_urique = acide_urique;
         this.bilan = bilan;
     }
-
-
 }
