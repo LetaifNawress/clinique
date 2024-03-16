@@ -1,5 +1,4 @@
-package com.example.clinique.laboratoire;
-
+package com.example.clinique.Entity.laboratoire;
 
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -9,26 +8,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-
 @Entity
 @Table(name = "glycemie")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonSerialize
-public class Glycemie {
+public class Glycemie extends Analyse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double glycemie;
-
-
-    @ManyToOne
-    @JoinColumn(name = "idB", nullable = false)
-    private Bilan bilan;
-
-    public Glycemie(double glycemie, Bilan bilan) {
-        this.glycemie = glycemie;
-        this.bilan = bilan;
-    }
 }
