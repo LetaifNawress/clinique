@@ -2,8 +2,8 @@
 package com.example.clinique.Services;
 
 import com.example.clinique.DTO.BilanDTO;
+import com.example.clinique.Entity.laboratoire.Bilan;
 import com.example.clinique.Repositories.BilanRepository;
-import com.example.clinique.laboratoire.Bilan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

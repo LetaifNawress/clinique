@@ -1,4 +1,4 @@
-package com.example.clinique.laboratoire;
+package com.example.clinique.Entity.laboratoire;
 
 
 
@@ -11,27 +11,25 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "hemoglobine")
+@Table(name = "transaminases")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonSerialize
-public class Hemoglobine {
+public class Transaminases {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double hemoglobine_glycosée;
-    private double creatinine;
-    private double acide_urique;
+    private double sgpt;
+    private double sgot;
 
     @ManyToOne
     @JoinColumn(name = "idB", nullable = false)
     private Bilan bilan;
 
-    public Hemoglobine(double hemoglobine_glycosée, double creatinine, double acide_urique, Bilan bilan) {
-        this.hemoglobine_glycosée = hemoglobine_glycosée;
-        this.creatinine = creatinine;
-        this.acide_urique = acide_urique;
+    public Transaminases(double sgpt, double sgot, Bilan bilan) {
+        this.sgpt = sgpt;
+        this.sgot = sgot;
         this.bilan = bilan;
     }
 }

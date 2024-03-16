@@ -7,14 +7,12 @@ import com.example.clinique.Entity.Equipement.Categorie;
 import com.example.clinique.Entity.Equipement.Fournisseur;
 import com.example.clinique.Repositories.CategorieRepository;
 import com.example.clinique.Services.EquipementService;
-import jdk.jfr.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/equipements")

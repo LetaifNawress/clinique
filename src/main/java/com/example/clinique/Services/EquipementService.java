@@ -8,7 +8,6 @@ import com.example.clinique.Entity.Equipement.Fournisseur;
 import com.example.clinique.Repositories.ArticleRepository;
 import com.example.clinique.Repositories.CategorieRepository;
 import com.example.clinique.Repositories.FournisseurRepository;
-
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
