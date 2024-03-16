@@ -56,10 +56,9 @@ public class AnalyseController {
         return glycemieRepository.findAll();
     }
 
-    @GetMapping("/glycemie/{id}")
-    public Glycemie getGlycemieById(@PathVariable Long id) {
-        return glycemieRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Glycemie not found with id: " + id));
+    @GetMapping()
+    public List<Glycemie> getGlycemieById() {
+        return glycemieRepository.findAll();
     }
 
     @PostMapping("/glycemie")
@@ -85,6 +84,8 @@ public class AnalyseController {
 
         glycemieRepository.delete(glycemie);
     }
+
+
 
 
 }

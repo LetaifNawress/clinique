@@ -2,6 +2,9 @@ package com.example.clinique.Controller;
 
 import com.example.clinique.DTO.ArticleDTO;
 import com.example.clinique.DTO.FournisseurDTO;
+import com.example.clinique.Entity.Equipement.Article;
+import com.example.clinique.Entity.Equipement.Categorie;
+import com.example.clinique.Entity.Equipement.Fournisseur;
 import com.example.clinique.Repositories.CategorieRepository;
 import com.example.clinique.Services.EquipementService;
 import org.springframework.beans.factory.annotation.Autowired;

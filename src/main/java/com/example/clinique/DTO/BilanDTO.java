@@ -12,11 +12,4 @@ import java.util.List;
 @Data
 public class BilanDTO {
     private Long id;
-    private List<Glycemie> glycemies;
-    private List<Hemoglobine> hemoglobines;
-    private List<IonogrammeSanguin> ionogrammeSanguin;
-    //private List<Lipidique>  lipidiques;
-    private List<Transaminases> transaminases;
-
-
 }

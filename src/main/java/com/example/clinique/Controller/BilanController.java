@@ -4,6 +4,8 @@ import com.example.clinique.DTO.BilanDTO;
 import com.example.clinique.Services.LaboratoireService;
 import com.example.clinique.Entity.laboratoire.Bilan;
 import com.example.clinique.Entity.laboratoire.Glycemie;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,31 +20,41 @@ public class BilanController {
     @Autowired
     private LaboratoireService laboratoireService;
 
-    @PostMapping
-    public ResponseEntity<Bilan> createBilan(@RequestBody Bilan bilan) {
+    @Autowired
+    private ObjectMapper objectMapper;
+
+//    @PostMapping
+//    public ResponseEntity<Bilan> createBilan(@RequestBody Bilan bilan) {
+//        Bilan savedBilan = laboratoireService.saveBilan(bilan);
+//        return new ResponseEntity<>(savedBilan, HttpStatus.CREATED);
+//    }
+
+
+//  @PostMapping("/glycemie")
+//  public ResponseEntity<Bilan> addGlycemieToNewBilan(@RequestBody Glycemie glycemie) {
+//      // Créer un nouveau bilan
+//      Bilan bilan = new Bilan();
+//
+//      // Ajouter la glycémie au bilan
+//      if (bilan.getGlycemies() == null) {
+//          bilan.setGlycemies(new ArrayList<>());
+//      }
+//      glycemie.setBilan(bilan);
+//      bilan.getGlycemies().add(glycemie);
+//
+//      // Enregistrer le nouveau bilan
+//      laboratoireService.saveBilan(bilan);
+//
+//      // Retourner le nouveau bilan avec le statut OK
+//      return new ResponseEntity<>(bilan, HttpStatus.OK);
+//  }
+
+    @PostMapping()
+    public ResponseEntity<Bilan> createBilan() throws JsonProcessingException {
+        Bilan bilan = new Bilan();
         Bilan savedBilan = laboratoireService.saveBilan(bilan);
         return new ResponseEntity<>(savedBilan, HttpStatus.CREATED);
     }
-
-
-  @PostMapping("/glycemie")
-  public ResponseEntity<Bilan> addGlycemieToNewBilan(@RequestBody Glycemie glycemie) {
-      // Créer un nouveau bilan
-      Bilan bilan = new Bilan();
-
-      // Ajouter la glycémie au bilan
-      if (bilan.getGlycemies() == null) {
-          bilan.setGlycemies(new ArrayList<>());
-      }
-      glycemie.setBilan(bilan);
-      bilan.getGlycemies().add(glycemie);
-
-      // Enregistrer le nouveau bilan
-      laboratoireService.saveBilan(bilan);
-
-      // Retourner le nouveau bilan avec le statut OK
-      return new ResponseEntity<>(bilan, HttpStatus.OK);
-  }
 
 
 
