@@ -1,4 +1,4 @@
-package com.example.clinique.laboratoire;
+package com.example.clinique.Entity.laboratoire;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

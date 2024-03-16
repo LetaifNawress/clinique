@@ -1,6 +1,5 @@
 package com.example.clinique;
 
-import com.example.clinique.Entity.Equipement.Categorie;
 import com.example.clinique.Repositories.CategorieRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

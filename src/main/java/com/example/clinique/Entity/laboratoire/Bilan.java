@@ -1,4 +1,4 @@
-package com.example.clinique.laboratoire;
+package com.example.clinique.Entity.laboratoire;
 
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

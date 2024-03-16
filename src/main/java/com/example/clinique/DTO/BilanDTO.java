@@ -1,10 +1,10 @@
 package com.example.clinique.DTO;
 
 
-import com.example.clinique.laboratoire.Glycemie;
-import com.example.clinique.laboratoire.Hemoglobine;
-import com.example.clinique.laboratoire.IonogrammeSanguin;
-import com.example.clinique.laboratoire.Transaminases;
+import com.example.clinique.Entity.laboratoire.Glycemie;
+import com.example.clinique.Entity.laboratoire.Hemoglobine;
+import com.example.clinique.Entity.laboratoire.IonogrammeSanguin;
+import com.example.clinique.Entity.laboratoire.Transaminases;
 import lombok.Data;
 
 import java.util.List;

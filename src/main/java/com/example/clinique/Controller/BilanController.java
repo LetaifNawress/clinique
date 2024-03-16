@@ -2,9 +2,8 @@ package com.example.clinique.Controller;
 
 import com.example.clinique.DTO.BilanDTO;
 import com.example.clinique.Services.LaboratoireService;
-import com.example.clinique.laboratoire.Bilan;
-import com.example.clinique.laboratoire.Glycemie;
-import com.example.clinique.laboratoire.Hemoglobine;
+import com.example.clinique.Entity.laboratoire.Bilan;
+import com.example.clinique.Entity.laboratoire.Glycemie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
