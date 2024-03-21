@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonSerialize
-public class Hemoglobine {
+public class Hemoglobine extends Analyse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,14 +24,5 @@ public class Hemoglobine {
     private double creatinine;
     private double acide_urique;
 
-    @ManyToOne
-    @JoinColumn(name = "idB", nullable = false)
-    private Bilan bilan;
 
-    public Hemoglobine(double hemoglobine_glycosée, double creatinine, double acide_urique, Bilan bilan) {
-        this.hemoglobine_glycosée = hemoglobine_glycosée;
-        this.creatinine = creatinine;
-        this.acide_urique = acide_urique;
-        this.bilan = bilan;
-    }
 }

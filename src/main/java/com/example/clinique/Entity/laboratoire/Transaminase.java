@@ -16,20 +16,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonSerialize
-public class Transaminases {
+public class Transaminase extends Analyse  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double sgpt;
     private double sgot;
 
-    @ManyToOne
-    @JoinColumn(name = "idB", nullable = false)
-    private Bilan bilan;
 
-    public Transaminases(double sgpt, double sgot, Bilan bilan) {
-        this.sgpt = sgpt;
-        this.sgot = sgot;
-        this.bilan = bilan;
-    }
 }

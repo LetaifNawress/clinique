@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonSerialize
-public class Lipidique {
+public class Lipidique extends Analyse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,16 +26,5 @@ public class Lipidique {
     private double ldl;
     private double vldl;
 
-    @ManyToOne
-    @JoinColumn(name = "idB", nullable = false)
-    private Bilan bilan;
 
-    public Lipidique(double cholesterol, double triglycerides, double hdl, double ldl, double vldl, Bilan bilan) {
-        this.cholesterol = cholesterol;
-        this.triglycerides = triglycerides;
-        this.hdl = hdl;
-        this.ldl = ldl;
-        this.vldl = vldl;
-        this.bilan = bilan;
-    }
 }

@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonSerialize
-public class IonogrammeSanguin {
+public class IonogrammeSanguin extends Analyse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,17 +27,5 @@ public class IonogrammeSanguin {
     private double trou_anionique;
     private double protides_totaux;
 
-    @ManyToOne
-    @JoinColumn(name = "idB", nullable = false)
-    private Bilan bilan;
 
-    public IonogrammeSanguin(double sodium, double potassium, double chlore, double reserve_alcaline, double trou_anionique, double protides_totaux, Bilan bilan) {
-        this.sodium = sodium;
-        this.potassium = potassium;
-        this.chlore = chlore;
-        this.reserve_alcaline = reserve_alcaline;
-        this.trou_anionique = trou_anionique;
-        this.protides_totaux = protides_totaux;
-        this.bilan = bilan;
-    }
 }
