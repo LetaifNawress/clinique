@@ -25,7 +25,7 @@ public class Commande {
     private String numero;
     private Date dateCommande;
     @OneToMany
-    private List<Article> articles;
+    private List<Diapositif_medicale> articles;
     private String statut;
     // Getters and setters
 }

@@ -12,12 +12,12 @@ import jakarta.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Article {
+public class Diapositif_medicale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
-
+    private String ref;
     private String description;
     @ManyToOne
     @JoinColumn(name = "fournisseur_id")
@@ -30,7 +30,7 @@ public class Article {
     private Integer seuilMax;
     private String emplacement;
 
-    public Article(String nom, String description, Fournisseur fournisseur, Categorie categorie, Integer quantite, Integer seuilMin, Integer seuilMax, String emplacement) {
+    public Diapositif_medicale(String nom, String description, Fournisseur fournisseur, Categorie categorie, Integer quantite, Integer seuilMin, Integer seuilMax, String emplacement, String ref) {
         this.nom = nom;
         this.description = description;
         this.fournisseur = fournisseur;
@@ -39,6 +39,7 @@ public class Article {
         this.seuilMin = seuilMin;
         this.seuilMax = seuilMax;
         this.emplacement = emplacement;
+        this.ref=ref;
 
     }
 }

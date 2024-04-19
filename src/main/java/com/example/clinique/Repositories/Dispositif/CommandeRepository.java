@@ -1,4 +1,4 @@
-package com.example.clinique.Repositories;
+package com.example.clinique.Repositories.Dispositif;
 
 import com.example.clinique.Entity.Equipement.Commande;
 import org.springframework.data.jpa.repository.JpaRepository;

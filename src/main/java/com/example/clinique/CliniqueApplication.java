@@ -1,17 +1,14 @@
 package com.example.clinique;
 
 import com.example.clinique.Entity.Equipement.Categorie;
-import com.example.clinique.Entity.laboratoire.*;
-import com.example.clinique.Repositories.AnalyseRepository;
-import com.example.clinique.Repositories.BilanRepository;
-import com.example.clinique.Repositories.CategorieRepository;
+import com.example.clinique.Repositories.labo.AnalyseRepository;
+import com.example.clinique.Repositories.labo.BilanRepository;
+import com.example.clinique.Repositories.Dispositif.CategorieRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

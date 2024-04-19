@@ -2,15 +2,13 @@
 package com.example.clinique.Services;
 
 import com.example.clinique.DTO.BilanCreation.*;
-import com.example.clinique.DTO.BilanDTO;
 import com.example.clinique.Entity.laboratoire.*;
-import com.example.clinique.Repositories.AnalyseRepository;
-import com.example.clinique.Repositories.BilanRepository;
+import com.example.clinique.Repositories.labo.AnalyseRepository;
+import com.example.clinique.Repositories.labo.BilanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.function.BinaryOperator;
 
 @Service
 public class LaboratoireService {

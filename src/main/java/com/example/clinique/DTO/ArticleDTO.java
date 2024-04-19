@@ -13,6 +13,7 @@ public class ArticleDTO {
         private Integer seuilMin;
         private Integer seuilMax;
         private String emplacement;
+        private String ref;
 
 
 

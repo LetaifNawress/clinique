@@ -2,12 +2,12 @@ package com.example.clinique.Services;
 
 import com.example.clinique.DTO.ArticleDTO;
 import com.example.clinique.DTO.FournisseurDTO;
-import com.example.clinique.Entity.Equipement.Article;
+import com.example.clinique.Entity.Equipement.Diapositif_medicale;
 import com.example.clinique.Entity.Equipement.Categorie;
 import com.example.clinique.Entity.Equipement.Fournisseur;
-import com.example.clinique.Repositories.ArticleRepository;
-import com.example.clinique.Repositories.CategorieRepository;
-import com.example.clinique.Repositories.FournisseurRepository;
+import com.example.clinique.Repositories.Dispositif.DispositifRepository;
+import com.example.clinique.Repositories.Dispositif.CategorieRepository;
+import com.example.clinique.Repositories.Dispositif.FournisseurRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,39 +17,39 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EquipementService {
+public class DispositifService {
 
 
 
     @Autowired
-    private ArticleRepository articleRepository;
+    private DispositifRepository articleRepository;
 
     @Autowired
     private FournisseurRepository fournisseurRepository; @Autowired
     private CategorieRepository categorieRepository ;
 
-    public List<Article> getAllEquipements() {
+    public List<Diapositif_medicale> getAllEquipements() {
         return articleRepository.findAll();
     }
 
-    public Article getEquipementById(Long id) {
+    public Diapositif_medicale getEquipementById(Long id) {
         return articleRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Equipement not found with id: " + id));
     }
 
-    public Article saveEquipement(ArticleDTO equipementDTO) {
-        // Récupérer le fournisseur à partir de l'identifiant
+    public Diapositif_medicale saveEquipement(ArticleDTO equipementDTO) {
+
         Fournisseur fournisseur = fournisseurRepository.findById(equipementDTO.getFournisseurId())
                 .orElseThrow(() -> new EntityNotFoundException("Fournisseur not found with id: " + equipementDTO.getFournisseurId()));
 
-        // Récupérer la catégorie à partir de l'identifiant
+
         Categorie categorie = categorieRepository.findById(equipementDTO.getCategorieId())
                 .orElseThrow(() -> new EntityNotFoundException("Categorie not found with id: " + equipementDTO.getCategorieId()));
 
-        // Créer l'objet Article à partir de l'ArticleDTO et des entités récupérées
-        Article equipement = new Article();
-        equipement.setNom(equipementDTO.getNom());
 
+        Diapositif_medicale equipement = new Diapositif_medicale();
+        equipement.setNom(equipementDTO.getNom());
+        equipement.setRef(equipementDTO.getRef());
         equipement.setDescription(equipementDTO.getDescription());
         equipement.setFournisseur(fournisseur);
         equipement.setCategorie(categorie);
@@ -89,15 +89,15 @@ public class EquipementService {
             throw new IllegalArgumentException("Les informations fournies sont incomplètes");
         }
 
-        // Créer une instance de Fournisseur à partir de FournisseurDTO
+
         Fournisseur fournisseur = new Fournisseur(fournisseurDTO.getNom(), fournisseurDTO.getAdresse(), fournisseurDTO.getEmail(), fournisseurDTO.getTel());
 
-        // Enregistrer le fournisseur dans le repository
+
         return fournisseurRepository.save(fournisseur);
     }
-    public Article updateArticle(Long id, ArticleDTO articleDTO) {
-        Optional<Article> optionalArticle = articleRepository.findById(id);
-        // Récupérer la catégorie à partir de l'identifiant
+    public Diapositif_medicale updateArticle(Long id, ArticleDTO articleDTO) {
+        Optional<Diapositif_medicale> optionalArticle = articleRepository.findById(id);
+
         Categorie categorie = categorieRepository.findById(articleDTO.getCategorieId())
                 .orElseThrow(() -> new EntityNotFoundException("Categorie not found with id: " + articleDTO.getCategorieId()));
         Fournisseur fournisseur = fournisseurRepository.findById(articleDTO.getFournisseurId())
@@ -106,20 +106,21 @@ public class EquipementService {
 
 
         if (optionalArticle.isPresent()) {
-            Article article = optionalArticle.get();
-            // Mettre à jour les champs de l'équipement avec les nouvelles données
+            Diapositif_medicale article = optionalArticle.get();
+
             article.setNom(articleDTO.getNom());
             article.setDescription(articleDTO.getDescription());
             article.setFournisseur(fournisseur);
             article.setCategorie(categorie);
+            article.setRef(articleDTO.getRef());
             article.setQuantite(articleDTO.getQuantite());
             article.setSeuilMin(articleDTO.getSeuilMin());
             article.setSeuilMax(articleDTO.getSeuilMax());
             article.setEmplacement(articleDTO.getEmplacement());
-            // Enregistrer et retourner l'équipement mis à jour
+
             return articleRepository.save(article);
         } else {
-            // Gérer le cas où l'équipement n'est pas trouvé
+
             throw new RuntimeException("Équipement non trouvé avec l'identifiant : " + id);
         }
     }
