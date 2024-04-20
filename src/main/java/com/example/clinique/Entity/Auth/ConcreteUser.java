@@ -1,31 +1,20 @@
 package com.example.clinique.Entity.Auth;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
-import java.util.Date;
 
 
-@Data
-@NoArgsConstructor
+@Setter
+@Getter
 @Entity
-public class Medecin extends User {
+@Table
 
-    @Column(nullable = true)
-    private String title;
-
-    @Column(nullable = true)
-    private String department;
-    public Medecin(String email, String password, String cin, String tele, String userName, Long id, Date dateOfBirth, String title, String department) {
-        super(id,email,password,cin,tele,userName,"DOCTOR",dateOfBirth);
-        this.title = title;
-        this.department = department;
-    }
-
+public class ConcreteUser extends User {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -33,26 +22,33 @@ public class Medecin extends User {
 
     @Override
     public String getUsername() {
+
         return null;
     }
 
     @Override
     public boolean isAccountNonExpired() {
+        // Implémentez la logique pour vérifier si le compte de l'utilisateur a expiré
         return false;
     }
 
     @Override
     public boolean isAccountNonLocked() {
+        // Implémentez la logique pour vérifier si le compte de l'utilisateur est verrouillé
         return false;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
+        // Implémentez la logique pour vérifier si les informations d'identification de l'utilisateur ont expiré
         return false;
     }
 
     @Override
     public boolean isEnabled() {
+        // Implémentez la logique pour vérifier si le compte de l'utilisateur est activé
         return false;
     }
 }
+
+

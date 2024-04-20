@@ -1,9 +1,12 @@
 package com.example.clinique.Entity.Auth;
 
+import io.swagger.v3.oas.annotations.info.Contact;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchConnectionDetails;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Date;
 @Entity
@@ -11,7 +14,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class User {
+public abstract class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +40,7 @@ public abstract class User {
 
     @Column(nullable = true)
     private Date dateOfBirth;
+
 
 
 }
