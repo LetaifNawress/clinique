@@ -12,14 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("auth")
 @RequiredArgsConstructor
+
 public class AuthenticationController {
 
     private final AuthenticationService service;
@@ -36,11 +34,11 @@ public class AuthenticationController {
     }
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest request) {
-        // Recherche de l'utilisateur dans la base de données
+        System.out.println("je suis ici : " + request.toString());
         User user = userRepository.findByEmail(request.getEmail())
                 .orElse(null);
 
-        // Vérification des identifiants et génération du token
+
         if (user != null && passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             String jwtToken = jwtService.generateToken(user);
             AuthenticationResponse response = AuthenticationResponse.builder()

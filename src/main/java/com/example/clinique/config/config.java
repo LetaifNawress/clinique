@@ -7,7 +7,7 @@ public class config implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:4200") // Remplacez "http://localhost:4200" par l'URL de votre frontend Angular
+                .allowedOrigins("http://localhost:4200")
                 .allowedMethods("GET", "POST", "PUT", "DELETE");
     }
 }
