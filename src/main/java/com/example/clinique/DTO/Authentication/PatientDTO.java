@@ -5,14 +5,16 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class UserRegistrationDTO {
+public class PatientDTO {
     private String email;
     private String password;
     private String cin;
     private String tele;
     private String userName;
+    private Long id;
     private String role;
     private Date dateOfBirth;
-    private String title;
-    private String department;
+    private String insuranceNumber;
+    private String address;
+
 }

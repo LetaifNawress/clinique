@@ -39,7 +39,7 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers("/auth/**", "/equipements/**","/bilans/**")
+                        req.requestMatchers("/auth/**", "/equipements/**","/bilans/**","/dossier-medical/**","/recep/**")
                                 .permitAll()
 
                         .anyRequest().authenticated()

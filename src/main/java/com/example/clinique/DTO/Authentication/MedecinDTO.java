@@ -1,17 +1,17 @@
 package com.example.clinique.DTO.Authentication;
 
-import lombok.Data;
-
 import java.util.Date;
 
+import lombok.Data;
+
 @Data
-public class UserRegistrationDTO {
+public class MedecinDTO {
     private String email;
     private String password;
     private String cin;
     private String tele;
     private String userName;
-    private String role;
+    private Long id;
     private Date dateOfBirth;
     private String title;
     private String department;
