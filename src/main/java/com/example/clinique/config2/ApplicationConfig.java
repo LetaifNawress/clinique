@@ -1,7 +1,7 @@
 package com.example.clinique.config2;
 
 
-import com.example.clinique.Repositories.UserRepository;
+import com.example.clinique.Repositories.Auth.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
