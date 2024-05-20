@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,18 @@ public class ReceptionistController {
 
 
 
+    @GetMapping("/rendezvous/search")
+    public ResponseEntity<List<RendezVous>> searchRendezVous(@RequestParam("date") String date,
+                                                             @RequestParam("medecinId") Long medecinId) {
+        List<RendezVous> rendezVousList = rendezVousRepository.findByDateAndMedecinId(date, medecinId);
+
+
+        if (rendezVousList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(rendezVousList);
+        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<RendezVous> getRendezVousById(@PathVariable("id") Long id) {

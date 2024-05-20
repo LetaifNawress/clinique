@@ -47,6 +47,7 @@ public class JwtService {
 
     claims.put("email", user.getEmail());
     claims.put("Role", user.getRole());
+    claims.put("Id", user.getId());
 
     Date expirationDate = new Date(System.currentTimeMillis() + jwtExpiration);
 

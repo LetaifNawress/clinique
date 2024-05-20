@@ -29,7 +29,8 @@ public class RendezVous {
     private Medecin medecin;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private String date;
 
     private String heure;
+    private Boolean etat ;
 }
