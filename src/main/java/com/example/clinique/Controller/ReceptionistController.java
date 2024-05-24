@@ -49,6 +49,7 @@ public class ReceptionistController {
 
     @PostMapping("/create")
     public ResponseEntity<RendezVous> createRendezVous(@RequestBody RendezVous rendezVous) {
+        rendezVous.setEtat(false);
         RendezVous savedRendezVous = rendezVousRepository.save(rendezVous);
         return new ResponseEntity<>(savedRendezVous, HttpStatus.CREATED);
     }
@@ -73,5 +74,19 @@ public class ReceptionistController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @PutMapping("/{id}/etat")
+    public ResponseEntity<RendezVous> changeEtat(@PathVariable Long id, @RequestParam Boolean etat) {
+        Optional<RendezVous> rendezVousOptional = rendezVousRepository.findById(id);
+        if (rendezVousOptional.isPresent()) {
+            RendezVous rendezVous = rendezVousOptional.get();
+            rendezVous.setEtat(etat);
+            rendezVousRepository.save(rendezVous);
+            return ResponseEntity.ok(rendezVous);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 
 }
