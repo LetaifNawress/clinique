@@ -1,6 +1,8 @@
 package com.example.clinique.Controller;
 
+import com.example.clinique.Entity.Doc.Consultation;
 import com.example.clinique.Entity.Doc.DossierMedical;
+import com.example.clinique.Repositories.Doc.ConsultationRepository;
 import com.example.clinique.Repositories.Doc.DossierMedicalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +18,8 @@ public class DossierMedicalController {
 
     @Autowired
     private DossierMedicalRepository dossierMedicalRepository;
-
+    @Autowired
+    private ConsultationRepository consultationRepository ;
 
     @GetMapping("/patient/{patientId}")
     public ResponseEntity<?> getDossierMedicalByPatientId(@PathVariable Long patientId) {
@@ -56,7 +59,6 @@ public class DossierMedicalController {
         Optional<DossierMedical> dossierMedicalOptional = dossierMedicalRepository.findById(id);
         if (dossierMedicalOptional.isPresent()) {
             DossierMedical dossierMedical = dossierMedicalOptional.get();
-            dossierMedical.setConsultations(dossierMedicalDetails.getConsultations());
             dossierMedical.setAllergies(dossierMedicalDetails.getAllergies());
             dossierMedical.setMaladiesChroniques(dossierMedicalDetails.getMaladiesChroniques());
             dossierMedical.setNumeroTelephoneProche(dossierMedicalDetails.getNumeroTelephoneProche());
@@ -68,6 +70,18 @@ public class DossierMedicalController {
             DossierMedical updatedDossierMedical = dossierMedicalRepository.save(dossierMedical);
 
             return new ResponseEntity<>(updatedDossierMedical, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @PostMapping("/add")
+    public ResponseEntity<Consultation> addConsultationToDossier(@RequestParam Long dossierId, @RequestBody Consultation consultation) {
+        Optional<DossierMedical> dossierOptional = dossierMedicalRepository.findById(dossierId);
+        if (dossierOptional.isPresent()) {
+            DossierMedical dossier = dossierOptional.get();
+            consultation.setDossierMedical(dossier);
+            Consultation savedConsultation = consultationRepository.save(consultation);
+            return new ResponseEntity<>(savedConsultation, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

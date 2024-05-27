@@ -1,5 +1,7 @@
 package com.example.clinique.Entity.Doc;
 
+import com.example.clinique.Entity.Auth.Medecin;
+import com.example.clinique.Entity.Auth.Patient;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +21,12 @@ public class Consultation {
     @JoinColumn(name = "dossier_medical_id", referencedColumnName = "id")
     private DossierMedical dossierMedical;
 
+    @ManyToOne
+    @JoinColumn(name = "medecin_id")
+    private Medecin medecin;
+
     @Column(nullable = false)
-    private Date date;
+    private String date;
 
     @Column(nullable = false)
     private String symptomes;
@@ -30,11 +36,16 @@ public class Consultation {
 
     @Column(nullable = false)
     private String ordonnance;
-    public Consultation(DossierMedical dossierMedical, Date date, String symptomes, String diagnostic, String ordonnances) {
+    @OneToOne
+    @JoinColumn(name = "patient_id", referencedColumnName = "id")
+    private Patient patient;
+    public Consultation(DossierMedical dossierMedical, String date, String symptomes, String diagnostic, String ordonnances,Medecin medecin,Patient patient) {
         this.dossierMedical = dossierMedical;
         this.date = date;
         this.symptomes = symptomes;
         this.diagnostic = diagnostic;
         this.ordonnance = ordonnances;
+        this.medecin=medecin;
+        this.patient=patient;
     }
 }

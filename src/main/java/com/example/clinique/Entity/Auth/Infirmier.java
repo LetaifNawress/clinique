@@ -1,13 +1,17 @@
 package com.example.clinique.Entity.Auth;
 
+import com.example.clinique.Entity.EtatDuJour;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +24,8 @@ public class Infirmier extends User {
     @Column(nullable = true)
     private String department;
 
-
+    @OneToMany(mappedBy = "infirmier")
+    private Set<EtatDuJour> etatsDuJour = new HashSet<>();
     public Infirmier (String email, String password, String cin, String tele, String userName, Long id, Date dateOfBirth, String title, String department) {
         super(id,email,password,cin,tele,userName,"INFERMIER",dateOfBirth);
         this.title = title;

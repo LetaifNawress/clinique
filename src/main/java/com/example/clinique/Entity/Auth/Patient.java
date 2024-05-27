@@ -1,8 +1,10 @@
 package com.example.clinique.Entity.Auth;
 
+import com.example.clinique.Entity.EtatDuJour;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,7 +33,8 @@ public class Patient extends User {
     // Date d'inscription du patient
     @Column(nullable = true)
     private Date registrationDate;
-
+    @OneToMany(mappedBy = "patient")
+    private Set<EtatDuJour> etatsDuJour = new HashSet<>();
 
     // Constructeur
     public Patient(String email, String password, String cin, String tele, String userName, Long id, Date dateOfBirth, String insuranceNumber, String medicalHistory, String address, String phoneNumber, Date registrationDate, Date lastVisitDate, String attendingPhysician, String allergies, String socialSecurityNumber) {
