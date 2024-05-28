@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/etatDuJour")
+@RequestMapping("/infer")
 public class InfirmierController {
 
     @Autowired

@@ -2,6 +2,7 @@ package com.example.clinique.Entity.Auth;
 
 import com.example.clinique.Entity.EtatDuJour;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
@@ -16,6 +17,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
+@DiscriminatorValue("INFERMIER")
 public class Infirmier extends User {
 
     @Column(nullable = true)
