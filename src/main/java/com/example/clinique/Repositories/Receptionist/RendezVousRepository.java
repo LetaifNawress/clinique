@@ -11,4 +11,6 @@ import java.util.List;
 public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
 
     List<RendezVous> findByDateAndMedecinId(String date, Long medecinId);
+
+    List<RendezVous> findByPatientId(Long patientId);
 }

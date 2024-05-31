@@ -86,7 +86,15 @@ public class ReceptionistController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    @GetMapping("/patient/{patientId}")
+    public ResponseEntity<List<RendezVous>> getRendezVousByPatient(@PathVariable Long patientId) {
+        List<RendezVous> rendezVousList = rendezVousRepository.findByPatientId(patientId);
+        if (rendezVousList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(rendezVousList);
+        }
+    }
 
 
 }
