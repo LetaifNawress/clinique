@@ -85,6 +85,7 @@ public class AuthenticationController {
 
 
         if (user != null && passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            System.out.println(user);
             String jwtToken = jwtService.generateToken(user);
             AuthenticationResponse response = AuthenticationResponse.builder()
                     .accessToken(jwtToken)

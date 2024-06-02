@@ -10,6 +10,7 @@ import com.example.clinique.Services.DispositifService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,9 +25,10 @@ public class DispositifController {
     @Autowired
     private CategorieRepository categorieRepository;
 
-    // Méthodes pour la gestion des dispositifs medicale
+
 
     @GetMapping("/equipements")
+    @PreAuthorize("hasRole('MANAGER')")
     public List<Diapositif_medicale> getAllEquipements() {
         return equipementService.getAllEquipements();
     }
