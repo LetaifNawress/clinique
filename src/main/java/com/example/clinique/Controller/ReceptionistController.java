@@ -1,6 +1,10 @@
 package com.example.clinique.Controller;
 
+import com.example.clinique.Entity.Auth.Patient;
+import com.example.clinique.Entity.Receptionist.Facture;
 import com.example.clinique.Entity.Receptionist.RendezVous;
+import com.example.clinique.Repositories.Auth.PatientRepository;
+import com.example.clinique.Repositories.Receptionist.FactureRepository;
 import com.example.clinique.Repositories.Receptionist.RendezVousRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +22,11 @@ public class ReceptionistController {
 
     @Autowired
     private  RendezVousRepository rendezVousRepository;
+    @Autowired
+    private FactureRepository factureRepository;
 
-
+    @Autowired
+    private PatientRepository patientRepository;
 
     @GetMapping("/rendezvous/search")
     public ResponseEntity<List<RendezVous>> searchRendezVous(@RequestParam("date") String date,
@@ -96,5 +103,54 @@ public class ReceptionistController {
         }
     }
 
+
+
+
+    @GetMapping("/facture/all")
+    public ResponseEntity<List<Facture>> getAllFactures() {
+        List<Facture> factures = factureRepository.findAll();
+        if (factures.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(factures);
+    }
+
+    @GetMapping("/facture/{id}")
+    public ResponseEntity<?> getFactureById(@PathVariable Long id) {
+        Optional<Facture> facture = factureRepository.findById(id);
+        if (facture.isPresent()) {
+            return ResponseEntity.ok(facture.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Facture with id " + id + " not found.");
+        }
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Facture> addFacture(@RequestBody Facture facture) {
+        Facture newFacture = factureRepository.save(facture);
+        return new ResponseEntity<>(newFacture, HttpStatus.CREATED);
+    }
+    @PutMapping("/facture/{id}")
+    public ResponseEntity<Facture> updateFacture(@PathVariable Long id, @RequestBody Facture updatedFacture) {
+        if (!factureRepository.existsById(id)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        updatedFacture.setId(id);
+        Facture updatedFactureEntity = factureRepository.save(updatedFacture);
+        return new ResponseEntity<>(updatedFactureEntity, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/facture/{id}")
+    public ResponseEntity<?> deleteFacture(@PathVariable Long id) {
+        if (factureRepository.existsById(id)) {
+            factureRepository.deleteById(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Facture with id " + id + " not found.");
+        }
+    }
 
 }

@@ -28,6 +28,7 @@ public class Patient extends User {
     @Column(nullable = true)
     private String address;
 
+
     @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private DossierMedical dossierMedical;
