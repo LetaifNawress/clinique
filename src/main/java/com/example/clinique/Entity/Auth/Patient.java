@@ -1,10 +1,9 @@
 package com.example.clinique.Entity.Auth;
 
+import com.example.clinique.Entity.Doc.DossierMedical;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.example.clinique.Entity.EtatDuJour;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,6 +27,10 @@ public class Patient extends User {
 
     @Column(nullable = true)
     private String address;
+
+    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private DossierMedical dossierMedical;
 
 
     // Date d'inscription du patient

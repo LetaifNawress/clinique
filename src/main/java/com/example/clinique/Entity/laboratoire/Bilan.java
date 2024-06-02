@@ -1,6 +1,7 @@
 package com.example.clinique.Entity.laboratoire;
 
 
+import com.example.clinique.Entity.Doc.DossierMedical;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
@@ -28,4 +29,10 @@ public class Bilan {
     @OneToMany(mappedBy = "bilan", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Analyse> analyses = new ArrayList<>();
+
+
+    @ManyToOne
+    @JoinColumn(name = "id")
+    @JsonManagedReference
+    private DossierMedical dossiersMedical;
 }

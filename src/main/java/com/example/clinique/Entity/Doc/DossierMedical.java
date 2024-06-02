@@ -2,6 +2,9 @@ package com.example.clinique.Entity.Doc;
 
 
 import com.example.clinique.Entity.Auth.Patient;
+import com.example.clinique.Entity.laboratoire.Bilan;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,10 +22,15 @@ public class DossierMedical {
 
     @OneToOne
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
+    @JsonBackReference
     private Patient patient;
 
     @OneToMany(mappedBy = "dossierMedical", cascade = CascadeType.ALL)
     private List<Consultation> consultations;
+
+    @OneToMany(mappedBy = "dossiersMedical", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Bilan> bilans;
 
     @Column(nullable = true)
     private String allergies;

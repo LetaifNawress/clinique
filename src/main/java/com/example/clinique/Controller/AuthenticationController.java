@@ -53,7 +53,7 @@ public class AuthenticationController {
 
 
 
-    @PostMapping("/add")
+    @PostMapping("/patient")
     public ResponseEntity<String> addPatient(@RequestBody PatientDTO patientDTO) {
         service.addPatient(patientDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body("Patient ajouté avec succès !");
@@ -136,12 +136,12 @@ public class AuthenticationController {
         Optional<User> userOptional = userRepository.findById(id);
         return userOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-//Patient crud
-@PostMapping("/patient")
-public ResponseEntity<Patient> addPatient(@RequestBody Patient patient) {
-    Patient savedPatient = patientRepository.save(patient);
-    return new ResponseEntity<>(savedPatient, HttpStatus.CREATED);
-}
+    //Patient crud
+    @PostMapping("/lala")
+    public ResponseEntity<Patient> addPatient(@RequestBody Patient patient) {
+        Patient savedPatient = patientRepository.save(patient);
+        return new ResponseEntity<>(savedPatient, HttpStatus.CREATED);
+    }
     @GetMapping("/patients")
     public ResponseEntity<List<Patient>> getAllPatients() {
         List<Patient> patients = patientRepository.findAll();

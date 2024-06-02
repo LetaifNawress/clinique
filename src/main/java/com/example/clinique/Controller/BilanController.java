@@ -28,12 +28,15 @@ public class BilanController {
 
     @PostMapping()
     public Bilan createBilan(@RequestBody BilanCreationDTO bilanCreationDTO) {
-        return laboratoireService.saveAllAnalysesAndBilan(bilanCreationDTO.analyses);
+        return laboratoireService.saveAllAnalysesAndBilan(
+                bilanCreationDTO.analyses,
+                bilanCreationDTO.dossierMedicalId
+        );
 
     }
     @PutMapping("/{id}")
     public Bilan updateBilan(@PathVariable Long id, @RequestBody BilanCreationDTO bilanCreationDTO) {
-        return laboratoireService.updateAllAnalysesAndBilan(id , bilanCreationDTO);
+        return laboratoireService.updateAllAnalysesAndBilan(bilanCreationDTO , id);
     }
 
 
@@ -59,6 +62,4 @@ public class BilanController {
         laboratoireService.deleteBilan(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
 }

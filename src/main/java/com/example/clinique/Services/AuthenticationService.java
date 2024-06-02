@@ -4,9 +4,11 @@ import com.example.clinique.DTO.Authentication.MedecinDTO;
 import com.example.clinique.DTO.Authentication.PatientDTO;
 import com.example.clinique.DTO.Authentication.UserRegistrationDTO;
 import com.example.clinique.Entity.Auth.*;
+import com.example.clinique.Entity.Doc.DossierMedical;
 import com.example.clinique.Repositories.Auth.MedecinRepository;
 import com.example.clinique.Repositories.Auth.PatientRepository;
 import com.example.clinique.Repositories.Auth.UserRepository;
+import com.example.clinique.Repositories.Doc.DossierMedicalRepository;
 import com.example.clinique.config2.JwtService;
 
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +25,7 @@ import java.util.stream.Collectors;
 public class AuthenticationService {
   private final UserRepository userRepository;
   private final MedecinRepository medecinRepository;
+  private final DossierMedicalRepository dossierMedicalRepository;
   private final PatientRepository patientRepository;
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
@@ -91,6 +95,12 @@ public class AuthenticationService {
     patient.setRole("PATIENT");
     patient.setDateOfBirth(patientDTO.getDateOfBirth());
     patient.setInsuranceNumber(patientDTO.getInsuranceNumber());
+
+    DossierMedical dossierMedical = new DossierMedical();
+    dossierMedical.setDateCreation(new Date());
+
+    patient.setDossierMedical(dossierMedical);
+    dossierMedical.setPatient(patient);
 
     patientRepository.save(patient);
   }
